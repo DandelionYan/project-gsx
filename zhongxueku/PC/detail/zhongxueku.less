@@ -1,0 +1,341 @@
+@import '../../main/base.less';
+
+.clearfloat() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+  zoom: 1;
+}
+
+body {
+  background-color: #fff;
+}
+.main {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.top-nav {
+  width: 100%;
+  height: 54px;
+  background-color: #5f85df;
+}
+.top-container {
+  width: 981px;
+  margin: 0 auto;
+  .logo {
+    position: relative;
+    top: -8px;
+    margin-right: 12px;
+    img {
+      position: relative;
+      top: 5px;
+      height: 35px;
+    }
+  }
+}
+.top-nav-item {
+  margin-top: 10px;
+  display: inline-block;
+  margin-right: 48px;
+  font-size: 18px;
+
+  a {
+    display: inline-block;
+    height: 18.5px;
+    color: #fff;
+    vertical-align: middle;
+  }
+}
+.line {
+  margin-right: 11px;
+}
+
+.content {
+  margin: 0 auto;
+  width: 981px;
+  text-align: left;
+}
+.top-bread {
+  margin: 10px auto;
+  span {
+    font-family: STHeitiSC-Light;
+    font-size: 14px;
+    color: #666666;
+    margin-right: 5px;
+  }
+}
+
+.content-middle {
+  width: 100%;
+  border: 1px solid #ddd;
+  margin-bottom: 18px;
+  overflow: hidden;
+
+  .img-logo {
+    float: left;
+    margin: 30px 20px 12px 26px;
+    width: 359px;
+    height: 229px;
+    img {
+      width: 359px;
+      height: 229px;
+    }
+  }
+  .img-content {
+    float: left;
+    width: 574px;
+    margin-top:30px;
+    padding-right: 10px;
+
+    h1 {
+      font-family:STHeitiSC-Medium;
+      font-size:28px;
+      color:#333333;
+      text-align:left;
+      margin-right: 18px;
+      border-bottom: 1px dashed #dddddd;
+    }
+    .school {
+      -webkit-column-count:2;
+      -moz-column-count:2;
+      column-count:2;
+      padding-top: 14px;
+      padding-bottom: 28px;
+      //p {
+      //  margin-bottom: 10px;
+      //  word-break: break-all;
+      //  span {
+      //    font-family: PingFang-SC-Regular;
+      //    letter-spacing: 0;
+      //    line-height: 15px;
+      //    text-align: left;
+      //    font-size: 16px;
+      //  }
+      //}
+      .column {
+        display: table;
+        margin-bottom: 10px;
+        word-break: break-all;
+        font-family: PingFang-SC-Regular;
+        letter-spacing: 0;
+        line-height: 15px;
+        text-align: left;
+        font-size: 16px;
+
+        .key {
+          display: table-cell;
+          width: 80px;
+          color: #777777;
+        }
+        .value {
+          display: table-cell;
+          color: #333;
+        }
+      }
+      .first {
+        color:#ff9a00;
+      }
+    }
+
+  }
+}
+
+
+.card-w {
+  position: relative;
+  width: 981px;
+  margin-top: 36px;
+  box-shadow:0 0 0 0 #dddddd;
+  .card-nav {
+    background:#ffffff;
+    border-bottom: 3px solid #5f85df;;
+    width: 100%;
+    line-height: 36px;
+    height: 36px;
+    a {
+      font-family: PingFang-SC-Regular;
+      color: #666;
+      font-size: 18px;
+      div {
+        float: left;
+        text-align: center;
+      }
+    }
+    .cur {
+      background-color: #5f85df;
+      letter-spacing: 0;
+      h3 {
+        color: #fff;
+
+      }
+    }
+  }
+
+  .content-card {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    background: #ffffff;
+    &:last-child {
+      margin-bottom: -10px;
+    }
+    .title {
+      background: #f0f0f0;
+      width: 941px;
+      height: 28px;
+      line-height: 28px;
+      .img-logo {
+        float: left;
+      }
+        span {
+          margin-left: 10px;
+          font-family: STHeitiSC-Medium;
+          font-size: 16px;
+          color: #333333;
+        }
+    }
+    .summary {
+      font-family: STHeitiSC-Light;
+      font-size: 16px;
+      color: #333333;
+      letter-spacing: 0;
+      text-align: justify;
+      margin: 17px 18px 30px;
+      p {
+        line-height: 30px;
+      }
+    }
+    .max-height {
+      max-height: 452px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+    }
+    .more {
+      position: relative;
+      margin: 0 auto;
+      background:#ffffff;
+      border-radius:2px;
+      width:118px;
+      height:37px;
+      border: 1px solid #ff9a00;
+      p {
+        position: absolute;
+        font-family:PingFang-SC-Regular;
+        font-size:16px;
+        color:#ff9a00;
+        top: 6px;
+        left: 15px;
+      }
+      img {
+        position: absolute;
+        top: 15px;
+        left: 80px;
+      }
+    }
+
+
+    //banner
+    .banner {
+      position: relative;
+      height: 149px;
+      //overflow: hidden;
+      margin: 0 auto;
+      text-align: center;
+      width: 100%;
+      .banner-ul {
+        position: absolute;
+        overflow: hidden;
+        z-index: 100;
+        top: 150px;
+        left: 43%;
+        a {
+          list-style-type: none;
+          margin-right: 7px;
+          float: left;
+          border-radius: 100%;
+          width: 8px;
+          height: 8px;
+          background-color: #ddd;
+        }
+        .banner-selected {
+          background: #5f85df;
+        }
+      }
+    }
+
+    .picture {
+      .img-show {
+        height: 100%;
+        //overflow: hidden;
+        margin: 0 auto;
+        position: relative;
+        .img-center {
+          position: relative;
+          visibility: visible;
+          left: 0;
+          width: 930px !important;
+          height: 100%;
+          //margin: 0 auto;
+          overflow: hidden;
+          float: left;
+          z-index: 2;
+        }
+        .item {
+          margin: 0;
+          padding: 0;
+          position: relative;
+          list-style: none;
+          z-index: 1;
+          width: 2000px;
+          height: 100%;
+          li {
+            float: left;
+            height: 133px;
+            margin: 10px 5px;
+            overflow: hidden;
+            img {
+              width: 176px;
+              height: 133px;
+            }
+          }
+        }
+        .active {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .top {
+    padding-top: 20px;
+  }
+
+
+  //    学校简介
+  .content-para {
+    padding: 16px 20px;
+  }
+  .copyright {
+    font-size: 12px;
+    border: 1px solid #E2E2E2;
+    background: #F3F8FE;
+    p {
+      padding: 10px 15px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+

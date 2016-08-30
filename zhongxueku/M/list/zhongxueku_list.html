@@ -1,0 +1,185 @@
+{{ *
+@file 中学库列表页
+@author zxy
+* }}
+<!--(可选)如果该页面需要引用js，就需要引用该html模板-->
+
+{{ extends file="apollo/common/base.html" }}
+
+<!-- (可选)引用php数据 -->
+{{ block name="data" }}
+
+{{ $smarty.block.parent }}
+
+{{ $script_path = 'activity/zhongxueku/zhongxue_list' }}
+
+{{ /block }}
+
+<!-- (可选)页面title -->
+{{ block name = "title" }}
+重点中学_中学大全_各地区重点中学_全国重点中学-学校简介_招生计划_历年成绩_对口中学-跟谁学
+{{ /block }}
+
+{{ block name = "description" }}
+跟谁学初中院校库为您提供{{ foreach $tpl_data as $list }}
+{{ $list.school_name }}
+{{ /foreach }},学校简介,招生计划,历年成绩,对口中学以及{{ foreach $tpl_data as $list }}
+{{ $list.school_name }}
+{{ /foreach }}的一些相关评价和相关信息。让您更好的了解{{ foreach $tpl_data as $list }}
+{{ $list.school_name }}
+{{ /foreach }}
+{{ /block }}
+
+{{ block name = "keywords" }}
+{{ foreach $tpl_data as $list }}
+{{ $list.school_name }}
+{{ /foreach }},学校简介,招生计划,历年成绩,对口中学
+{{ /block }}
+
+{{ block name="viewport" }}
+{{ include file="apollo/common/autoRem.html" }}
+{{ /block }}
+
+{{ block name="style" }}
+<link rel="stylesheet" href="{{ $static_origin }}/src/apollo/css/activity/zhongxueku/zhongxue_list.styl">
+{{ /block }}
+
+{{ block name="body" }}
+{{ strip }}
+<div class="main">
+    <div class="nav">
+        <div class="nav-content">
+            <span class="logo"><a href=""><img src="http://img.gsxservice.com/seo/zhongxueku/logoH.png" alt=""></a></span>
+            <span class="title"><a href="">中学库</a></span>
+        </div>
+    </div>
+    <form class="input-box">
+        <img src="http://img.gsxservice.com/seo/zhongxueku/serach1.png">
+        <input type="search" class="searchInput" placeholder="输入你要查找的学校/小区/地段">
+    </form>
+    <div class="top-image">
+        <!--<img scr="../img/zhongxueku/banner.png" alt="">-->
+    </div>
+    <div class="address">
+        <div class="content-block" id="province" >
+            <span class="province">省份</span>
+            <img src="http://img.gsxservice.com/zhanqun/zhongxueku/forwad.png" alt="forward.png">
+        </div>
+
+        <div class="content-block" id="city">
+            <span class="city">城市</span>
+            <img src="http://img.gsxservice.com/zhanqun/zhongxueku/forwad.png" alt="forward.png">
+        </div>
+        <div class="content-block" id="district">
+            <span class="district">区域</span>
+            <img src="http://img.gsxservice.com/zhanqun/zhongxueku/forwad.png" alt="forward.png">
+        </div>
+    </div>
+
+    <div class="middle-content" id="school-property">
+        <span class="school-property">办学性质</span>
+        <img src="http://img.gsxservice.com/zhanqun/zhongxueku/forwad.png" alt="forward.png">
+    </div>
+      <!--<div class="middle-content" id="level">-->
+          <!--<span class="school_level">学校级别</span>-->
+          <!--<img src="../../../src/apollo/img/zhongxueku/forwad.png" alt="forward.png">-->
+      <!--</div> -->
+      <div class="middle-content" id="attend-way">
+          <span class="attend-way">升学方式</span>
+          <img src="http://img.gsxservice.com/zhanqun/zhongxueku/forwad.png" alt="forward.png">
+      </div>
+      <div class="search-button">
+          <button>搜索</button>
+      </div>
+      <div class="recommend-or-result">
+          <div class="title">
+              <span>热门中学</span>
+          </div>
+          {{ foreach $tpl_data as $list }}
+          <a class="single-school" href="/zhongxueku/{{ $list.id }}.html">
+                  <div class="show-school">
+                  {{ if !empty($list.school_logo) }}
+                  <img src="{{ $list.school_logo }}" />
+                  {{ else }}
+                  <img src="http://img.gsxservice.com/zhanqun/youshengxiao/default02.jpg"/>
+                  {{ /if }}
+              </div>
+              <div class="school-info">
+                  <div class="name">
+                      <h3 class="ellipsis">{{ $list.school_name }}</h3>
+                      <span class="point"><img src="http://img.gsxservice.com/zhanqun/zhongxueku/point.png"></span>
+                      <span class="quyu">{{ $list.province }}</span>
+                  </div>
+                  <div class="detail">
+                      {{ if !empty($list.school_type) }}
+                      <p>办公性质:{{ $list.school_type }}</p>
+                      {{ /if }}
+                      <p>学校级别:重点</p>
+                      {{ if !empty($list.entrance) }}
+                      <p>升学方式:{{ $list.entrance }}</p>
+                      {{ /if }}
+                  </div>
+              </div>
+          </a>
+          {{ /foreach }}
+      </div>
+      <div class="load-more-schools">
+          <a href="javascript:void(0);">加载更多</a>
+      </div>
+
+      <div class="show-search">
+          <div class="top-line">
+    <a href=""><</a>
+    <input type="search">
+</div>
+<div class="result-list">
+</div>
+</div>
+<div class="mask"></div>
+<div class="show-school-property">
+    <div class="title">办学性质</div>
+    <div class="items">
+        <span class="item">全部</span>
+        <span class="item">公办</span>
+        <span class="item">民办</span>
+    </div>
+    <div class="sure">
+        <button>确定</button>
+    </div>
+</div>
+<div class="show-level">
+    <div class="title">学校级别</div>
+    <div class="items">
+        <span class="item">全部</span>
+        <span class="item">市重点</span>
+        <span class="item">全国重点</span>
+        <span class="item">区重点</span>
+        <span class="item">普通</span>
+        <span class="item">省重点</span>
+    </div>
+    <div class="sure">
+        <button>确定</button>
+    </div>
+</div>
+<div class="show-attend-way">
+    <div class="title">升学方式</div>
+    <div class="items">
+        <span class="item">全部</span>
+        <span class="item">统招</span>
+        <span class="item">自招</span>
+        <span class="item">择校</span>
+        <span class="item">共建</span>
+    </div>
+    <div class="sure">
+        <button>确定</button>
+    </div>
+</div>
+
+</div>
+
+
+
+{{ include file="apollo/common/script.html" }}
+<!-- (必选)引用base页面 -->
+{{ /strip }}
+{{ /block }}

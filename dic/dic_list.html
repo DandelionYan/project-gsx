@@ -1,0 +1,639 @@
+{{ *
+
+@file 词典详情页
+@author zuoxuyan
+
+* }}
+{{ extends file = "apollo/common/main/base.html" }}
+
+{{ block name = "data" }}
+
+{{ $smarty.block.parent }}
+
+{{ $script_path = "activity/dictionary" }}
+
+{{ $flotage_config.hidden = 1 }}
+{{ *$rave_config.hidden = 1* }}
+{{ $nav_config.hidden = 0 }}
+
+{{ /block }}
+
+{{ block name = "title" }}
+{{ $tpl_data.word }}是什么意思_{{ $tpl_data.word }}中文在线翻译_音标_读音_{{ $tpl_data.word }}用法_例句_详细解析_跟谁学词典
+{{ /block }}
+
+{{ block name = "description" }}
+跟谁学为您提供了最全面的{{ $tpl_data.word }}是什么意思_{{ $tpl_data.word }}中文在线翻译,{{ $tpl_data.word }}音标,{{ $tpl_data.word }}读音,{{ $tpl_data.word }}用法,{{ $tpl_data.word }}例句,{{ $tpl_data.word }}详细解析介绍,祝您最快速了解{{ $tpl_data.word }}用法、读音等帮助您更好的学习英语
+{{ /block }}
+
+{{ block name = "keywords" }}
+{{ $tpl_data.word }}是什么意思_{{ $tpl_data.word }}中文在线翻译,{{ $tpl_data.word }}音标,{{ $tpl_data.word }}读音,{{ $tpl_data.word }}用法,{{ $tpl_data.word }}例句,{{ $tpl_data.word }}详细解析
+{{ /block }}
+
+{{ block name = "icon" }}
+{{ $smarty.block.parent }}
+{{ /block }}
+
+{{ block name = "style" }}
+
+<link rel="stylesheet" href="{{ $static_origin }}/src/apollo/css/activity/dic_list.less">
+
+{{ /block }}
+{{ strip }}
+{{ block name = "main" }}
+{{ $smarty.block.parent }}
+<div id="main" data-breadcrumb="{{ $tpl_data.word }}">
+    <div class="content-main">
+        <div class="top">
+            <span><a href="http://www.genshuixue.com">跟谁学</a></span>
+            <span>&gt;</span>
+            <span>词典</span>
+            <span>&gt;</span>
+            <span><a href="">{{ $tpl_data.word }}是什么意思</a></span>
+        </div>
+        <div class="card-w">
+            <!--词汇-->
+            <div class="content-card">
+                <div class="dic_content">
+                    <div class="dic_top">
+                        <h1>{{ $tpl_data.word }}</h1>
+                        <div class="dic_degree">
+                            <span>词汇等级</span>
+                            {{ if isset($tpl_data.ci_level) }}
+                            <i class="i-star" style="display: none;">{{ $tpl_data.ci_level }}</i>
+                            {{ /if }}
+                            {{ if !empty($tpl_data.ci_type) }}
+                            <p>
+                                {{ if !empty($tpl_data.ci_type) }}
+                                {{ foreach $tpl_data.ci_type as $item }}
+                                <span>{{ $item }}</span>
+                                <span>&nbsp;</span>
+                                {{ /foreach }}
+                                {{ /if }}
+                            </p>
+                            {{ /if }}
+                        </div>
+                        {{ if !empty($tpl_data.pronunciation) }}
+                        <p class="analyse">
+                            {{ if !empty($tpl_data.pronunciation) }}
+                            {{ foreach $tpl_data.pronunciation as $item => $value }}
+                            <span>{{ $item }}</span>
+                            {{ /foreach }}
+                            {{ /if }}
+                        </p>
+                        {{ /if }}
+                    </div>
+                    <div class="dic_text">
+                        <!--词性-->
+                        {{ if !empty($tpl_data.ci_character) }}
+                        {{ foreach $tpl_data.ci_character as $item => $value }}
+                        <p class="ci_character">
+                            <span>{{ $item }}</span>
+                            <span>{{ $value }}</span>
+                        </p>
+                        {{ /foreach }}
+                        {{ /if }}
+                        {{ if !empty($tpl_data.other_meaning) }}
+                        <div class="other_meaning">
+                            {{ foreach $tpl_data.other_meaning as $item => $value }}
+                            <p class="key">{{ $item }}</p>
+                            <p class="value">{{ $value }}</p>
+                            {{ /foreach }}
+                        </div>
+                        {{ /if }}
+                        <p style="font-size: 14px;font-weight: bold;">变形</p>
+                        <!--复数-->
+                        {{ if !empty($tpl_data.ci_change) }}
+                        {{ foreach $tpl_data.ci_change as $item => $value }}
+                        <p class="ci_change">
+                            <span>{{ $item }}:</span>
+                            <span>{{ $value }}</span>
+                        </p>
+                        {{ /foreach }}
+                        {{ /if }}
+                    </div>
+                </div>
+            </div>
+            <!--释义-->
+            <!--<div class="content-card">-->
+            <div class="card_nav" style="position: static; margin: 0 auto; top: 0;">
+                <ul class="word_detail">
+                    <li class="cur"><h2>释义</h2></li>
+                    <li><h2>详解</h2></li>
+                    <li><h2>真题</h2></li>
+                    <li><h2>例句</h2></li>
+                    <li><h2>词典</h2></li>
+                    <li><h2>相关词汇</h2></li>
+                </ul>
+            </div>
+            <!--释义-->
+
+            <div class="content_paragraph show_content">
+                {{ if !empty($tpl_data.paraphrase) }}
+                {{ if !empty($tpl_data.paraphrase['详尽释义']) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>详尽释义</h3>
+                    </div>
+                    <hr/>
+                    <div class="para_content">
+                        {{ foreach $tpl_data.paraphrase['详尽释义'] as $item }}
+                        <p>
+                            {{ if !empty($item.english_name) }}
+                            <span class="english_name">{{ $item.english_name }}</span>
+                            {{ /if }}
+                            {{ if !empty($item.name) }}
+                            <span class="name">{{ $item.name }}</span>
+                            {{ /if }}
+                        </p>
+                        <ol>
+                            {{ if !empty($item.meanings) }}
+                            {{ foreach $item.meanings as $item_meaning }}
+                            <li>{{ $item_meaning }}</li>
+                            {{ /foreach }}
+                            {{ /if }}
+                        </ol>
+                        {{ /foreach }}
+                    </div>
+                </div>
+                {{ /if }}
+                <!--</div>-->
+                <!--双解释义-->
+
+                <!--<div class="content-card">-->
+                {{ if !empty($tpl_data.paraphrase) }}
+                {{ if !empty($tpl_data.paraphrase['双解释义']) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>双解释义</h3>
+                    </div>
+                    <hr/>
+                    <div class="para_content">
+                        {{ foreach $tpl_data.paraphrase['双解释义'] as $item }}
+                        <p>
+                            {{ if !empty($item.english_name) }}
+                            <span class="english_name">{{ $item.english_name }}</span>
+                            {{ /if }}
+                            {{ if !empty($item.name) }}
+                            <span class="name">{{ $item.name }}</span>
+                            {{ /if }}
+                        </p>
+                        {{ if !empty($item.meanings) }}
+                        <ol>
+                            {{ foreach $item.meanings as $item_meaning }}
+                            <li>{{ $item_meaning }}</li>
+                            {{ /foreach }}
+                        </ol>
+                        {{ /if }}
+                        {{ /foreach }}
+                    </div>
+                </div>
+                {{ /if }}
+                {{ /if }}
+                <!--</div>-->
+                <!--英英释义-->
+                <!--<div class="content-card">-->
+                {{ if !empty(($tpl_data.paraphrase)&&($tpl_data.paraphrase['英英释义'])) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>英英释义</h3>
+                    </div>
+                    <hr/>
+                    <div class="para_content">
+                        {{ foreach $tpl_data.paraphrase['英英释义'] as $item }}
+                        <p>
+                            {{ if !empty($item.english_name) }}
+                            <span class="english_name bold">{{ $item.english_name }}</span>
+                            {{ /if }}
+                            {{ if !empty($item.name) }}
+                            <span class="name">{{ $item.name }}</span>
+                            {{ /if }}
+                        </p>
+                        {{ if !empty($item.meanings) }}
+                        <ol>
+                            {{ foreach $item.meanings as $meaning => $value }}
+                            <li> {{ $meaning }}
+                                {{ foreach $value as $item1 => $value1 }}
+                                <p class="meaning">{{ $value1 }}</p>
+                                {{ /foreach }}
+                            </li>
+                            {{ /foreach }}
+                        </ol>
+                        {{ /if }}
+                        {{ /foreach }}
+                    </div>
+                </div>
+                {{ /if }}
+
+
+                {{ if !empty(($tpl_data.paraphrase)&&($tpl_data.paraphrase['网络释义'])) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>网络释义</h3>
+                    </div>
+                    <hr/>
+                    <div class="para_content">
+                        {{ foreach $tpl_data.paraphrase['网络释义'] as $item }}
+                        <p>
+                            {{ if !empty($item.english_name) }}
+                            <span class="english_name bold">{{ $item.english_name }}</span>
+                            {{ /if }}
+                            {{ if !empty($item.name) }}
+                            <span class="name">{{ $item.name }}</span>
+                            {{ /if }}
+                        </p>
+                        {{ if !empty($item.meanings) }}
+                        <ol>
+                            {{ foreach $item.meanings as $meaning }}
+                            <li>
+                                {{ $meaning }}
+                            </li>
+                            {{ /foreach }}
+                        </ol>
+                        {{ /if }}
+                        {{ /foreach }}
+                    </div>
+                </div>
+                {{ /if }}
+
+
+                {{ /if }}
+            </div>
+
+            <!--</div>-->
+
+            <!--详解-->
+
+
+            <div class="content_paragraph">
+                {{ if !empty($tpl_data.annotation) }}
+
+                {{ if !empty($tpl_data.annotation['常用短语']) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>常用短语</h3>
+                    </div>
+                    <hr/>
+                    <div class="para_content">
+                        <ol>
+                            {{ foreach $tpl_data.annotation['常用短语'] as $item }}
+                            <li>{{ $item }}</li>
+                            {{ /foreach }}
+                        </ol>
+                    </div>
+                </div>
+                {{ /if }}
+
+
+
+
+
+                {{ if !empty($tpl_data.annotation['词语用法']) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>词语用法</h3>
+                    </div>
+                    <hr/>
+                    <div class="para_content">
+                        {{ foreach $tpl_data.annotation['词语用法'] as $item }}
+                        <p>
+                            {{ if !empty($item.english_name) }}
+                            <span class="english_name">{{ $item.english_name }}</span>
+                            {{ /if }}
+                            {{ if !empty($item.name) }}
+                            <span class="name">{{ $item.name }}</span>
+                            {{ /if }}
+                        </p>
+                        {{ if !empty($item.sentences) }}
+                        <ol>
+                            {{ foreach $item.sentences as $item_sentence }}
+                            <li>{{ $item_sentence }}</li>
+                            {{ /foreach }}
+                        </ol>
+                        {{ /if }}
+                        {{ /foreach }}
+                    </div>
+                </div>
+                {{ /if }}
+
+                {{ if !empty($tpl_data.annotation['词义辨析']) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>词义辨析</h3>
+                    </div>
+                    <hr/>
+                    <div class="para_content">
+                        {{ foreach $tpl_data.annotation['词义辨析'] as $item }}
+                        <p>
+                            {{ if !empty($item.english_name) }}
+                            <span class="english_name">{{ $item.english_name }}</span>
+                            {{ /if }}
+                            {{ if !empty($item.name) }}
+                            <span class="name">{{ $item.name }}</span>
+                            {{ /if }}
+                        </p>
+                        {{ if !empty($item.phrase_detail) }}
+                        {{ foreach $item.phrase_detail as $item_phrase }}
+                        <p class="phrase">{{ $item_phrase.phrase }}</p>
+
+                        <ol>
+                            {{ foreach $item_phrase.sentences as $sentences }}
+                            <li>{{ $sentences }}</li>
+                            {{ /foreach }}
+                        </ol>
+
+                        {{ /foreach }}
+                        {{ /if }}
+
+                        {{ /foreach }}
+                    </div>
+                </div>
+                {{ /if }}
+                {{ /if }}
+            </div>
+
+
+
+            <div class="content_paragraph">
+                {{ if !empty($tpl_data.question) }}
+                {{ if !empty($tpl_data.question.cetFour) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>四级真题</h3>
+                    </div>
+                    <hr/>
+                    <div class="para_content">
+                        <ol class="cetFour">
+                            {{ if !empty($tpl_data.question.cetFour) }}
+                            <li>
+                                {{ $tpl_data.question.cetFour.sentence }}
+                            </li>
+                            {{ /if }}
+                        </ol>
+                        {{ if !empty($tpl_data.question.cetFour.come) }}
+                        <p class="cet_come">
+                            {{ $tpl_data.question.cetFour.come }}
+                        </p>
+                        {{ /if }}
+                    </div>
+                </div>
+                {{ /if }}
+
+                {{ if (!empty($tpl_data.question)) && (!empty($tpl_data.question.cetSix)) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>六级真题</h3>
+                    </div>
+                    <hr/>
+                    <div class="para_content">
+                        <ol class="cet">
+                            {{ if !empty($tpl_data.question.cetSix.sentence) }}
+                            <li>
+                                {{ $tpl_data.question.cetSix.sentence }}
+                            </li>
+                            {{ /if }}
+                        </ol>
+                        {{ if !empty($tpl_data.question.cetSix.come) }}
+                        <p class="cet_come">
+                            {{ $tpl_data.question.cetSix.come }}
+                        </p>
+                        {{ /if }}
+                    </div>
+                </div>
+                {{ /if }}
+                {{ /if }}
+            </div>
+
+
+            <!--</div>-->
+
+            <!--例句-->
+
+
+            <div class="content_paragraph">
+                {{ if !empty($tpl_data.example) }}
+                {{ if !empty($tpl_data.example['例句']) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>例句</h3>
+                    </div>
+                    <hr/>
+                    {{ foreach $tpl_data.example['例句'] as $item => $value }}
+                    <div class="para_content">
+                        <p class="property">{{ $item }}</p>
+                        <ol>
+                            {{ foreach $value as $item1  }}
+                            <li>
+                                {{ $item1.english }}
+                                <p>{{ $item1.chinese }}</p>
+                            </li>
+                            {{ /foreach }}
+                        </ol>
+                    </div>
+                    {{ /foreach }}
+                </div>
+                {{ /if }}
+
+
+                {{ if !empty($tpl_data.example['常见句型']) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>常见句型</h3>
+                    </div>
+                    <hr/>
+                    {{ foreach $tpl_data.example['常见句型'] as $item => $value }}
+                    <div class="para_content">
+                        <p class="property">{{ $item }}</p>
+                        <ol>
+                            {{ foreach $value as $item1 }}
+                            <li>
+                                {{ $item1.english }}
+                                <p>{{ $item1.chinese }}</p>
+                            </li>
+                            {{ /foreach }}
+                        </ol>
+                    </div>
+                    {{ /foreach }}
+                </div>
+                {{ /if }}
+
+
+                {{ if !empty($tpl_data.example['经典引文']) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>经典引文</h3>
+                    </div>
+                    <hr/>
+                    {{ foreach $tpl_data.example['经典引文'] as $item }}
+                    <div class="para_content">
+                        <div class="example-sentence">{{ $item.sentence }}</div>
+                        <div class="example-source">{{ $item.source }}</div>
+                    </div>
+                    {{ /foreach }}
+                </div>
+                {{ /if }}
+                {{ /if }}
+            </div>
+
+
+            <!--</div>-->
+
+            <!--词典-->
+
+            <div class="content_paragraph">
+                {{ if !empty($tpl_data.dict) }}
+                <div class="explain-content">
+
+                    <div class="cur explain_title">
+                        <h3>柯林斯高阶英汉双解学习词典</h3>
+                    </div>
+                    <hr/>
+                    <div class="para_content dict">
+                        <!--<ol type="circle">-->
+                        {{ foreach $tpl_data.dict['柯林斯高阶英汉双解学习词典'] as $item   }}
+                        <div class="contentlist">
+                            <!--<li>-->
+                            <div class="hideContent" style=" width:15px; height:15px;border-radius:50%;border: 1px solid #5a5a5a; float: left;">
+                                <span style="height:15px; line-height:15px; display:block; text-align:center">{{ $item@index+1 }}</span>
+                            </div>
+                            <span>&nbsp;&nbsp;</span>
+                            {{ if !empty($item.posp) }}
+                            <span>{{ $item.posp }}</span>
+                            {{ /if }}
+                            <span>&nbsp;&nbsp;</span>
+                            {{ if !empty($item.tran) }}
+                            <span>{{ $item.tran }}</span>
+                            {{ /if }}
+                            {{ if !empty($item.def) }}
+                            <p class="def">{{ $item.def }}</p>
+                            {{ /if }}
+                            <ul>
+                                {{ foreach $item.example as $item1 }}
+                                <li>
+                                    <p>{{ $item1.ex }} </p>
+                                    <p>{{ $item1.tran }} </p>
+                                </li>
+                                {{ /foreach }}
+                            </ul>
+                        </div>
+                        {{ /foreach }}
+                    </div>
+                </div>
+                {{ /if }}
+            </div>
+
+
+            <!--相关词汇-->
+
+            <div class="content_paragraph">
+                {{ if !empty($tpl_data.related_word) }}
+                {{ if !empty($tpl_data.related_word['近反义词']) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>近反义词</h3>
+                    </div>
+                    <hr/>
+                    <div class="para_content">
+                        {{ foreach $tpl_data.related_word['近反义词'] as $item => $value }}
+                        <p class="property">{{ $item }}</p>
+                        {{ foreach $value as $item1 => $value1 }}
+                        <p style="margin-left: 20px;">{{ $item1 }}</p>
+
+                        <ol>
+                            {{ foreach $value1 as $item2 }}
+                            <li>{{ $item2 }}</li>
+                            {{ /foreach }}
+                        </ol>
+                        {{ /foreach }}
+                        {{ /foreach }}
+                    </div>
+                </div>
+                {{ /if }}
+                {{ /if }}
+
+                {{ if !empty($tpl_data.related_word) }}
+                {{ if !empty($tpl_data.related_word['词汇搭配']) }}
+                <div class="explain-content">
+                    <div class="cur explain_title">
+                        <h3>词汇搭配</h3>
+                    </div>
+                    <hr/>
+                    <div class="para_content">
+                        {{ foreach $tpl_data.related_word['词汇搭配'] as $item => $value }}
+                        <p class="property">{{ $item }}</p>
+                        {{ foreach $value as $item1 }}
+                        <p style="margin: 14px 0;">{{ $item1.title }}</p>
+                        <ol>
+                            {{ foreach $item1.words as $item2 }}
+                            <li> {{ $item2 }}</li>
+                            {{ /foreach }}
+                        </ol>
+                        {{ /foreach }}
+                        {{ /foreach }}
+                    </div>
+                </div>
+                {{ /if }}
+                {{ /if }}
+            </div>
+
+
+        </div>
+
+        <div class="site-card">
+            {{ if !empty($tpl_data.recommend) }}
+            <div class="h-ad-words">
+                <div class="words_head">
+                    <span class="common">临近单词</span>
+                    <span class="abbr">缩略词语</span>
+                    <span class="search">相关搜索</span>
+                </div>
+
+                <div class="words_content">
+
+                    <div class="words_side count-two content-common">
+                        {{ if !empty($tpl_data.recommend['临近单词']) }}
+                        {{ foreach $tpl_data.recommend['临近单词'] as $item }}
+                        <p>{{ $item }}</p>
+                        {{ /foreach }}
+                        {{ /if }}
+                    </div>
+
+
+
+                    <div class="words_side content-abbr">
+                        {{ if !empty($tpl_data.recommend['缩略词']) }}
+                        {{ foreach $tpl_data.recommend['缩略词'] as $item => $value }}
+                        {{ foreach $value as $item1 }}
+                        <p>{{ $item1 }}</p>
+                        {{ /foreach }}
+                        {{ /foreach }}
+                        {{ /if }}
+                    </div>
+
+                    <div class="words_side content-search">
+                        {{ if !empty($tpl_data.recommend['相关搜索']) }}
+                        {{ foreach $tpl_data.recommend['相关搜索'] as $item }}
+                        <p>{{ $item }}</p>
+                        {{ /foreach }}
+                        {{ /if }}
+                    </div>
+
+                </div>
+            </div>
+            {{ /if }}
+
+            <div class="ad">
+                <div class="ad-main-content">
+                    <div class="ad-header">猜你喜欢</div>
+
+                    <div style="width: 250px;">
+                        <script src="http://file.gsxservice.com/zhanqun/static/js/un-cr.js?v=9" data-node="un-cr" type="text/javascript"></script>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ /block }}
+{{ /strip }}

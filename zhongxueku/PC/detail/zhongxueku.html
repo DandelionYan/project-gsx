@@ -1,0 +1,374 @@
+{{ *
+
+@file 中学库pc详情页
+@author zxy
+
+* }}
+{{ extends file = "apollo/common/main/base.html" }}
+
+{{ block name = "data" }}
+
+{{ $smarty.block.parent }}
+{{ $script_path = "activity/zhongxueku/zhongxueku" }}
+
+{{ *不显示* }}
+{{ $flotage_config.hidden = 1 }}
+{{ *$rave_config.hidden = 1* }}
+{{ $nav_config.hidden = 0 }}
+
+{{ /block }}
+
+{{ block name = "title" }}
+【{{ $tpl_data.school_name }}】{{ $tpl_data.school_name }}学校简介_招生计划_历年成绩_对口中学-跟谁学
+{{ /block }}
+
+{{ block name = "description" }}
+跟谁学初中院校库为您提供{{ $tpl_data.school_name }},学校简介,招生计划,历年成绩,对口中学以及{{ $tpl_data.school_name }}的一些相关评价和相关信息。让您更好的了解{{ $tpl_data.school_name }}。
+{{ /block }}
+
+{{ block name = "keywords" }}
+{{ $tpl_data.school_name }},学校简介,招生计划,历年成绩,对口中学
+{{ /block }}
+
+{{ block name = "icon" }}
+{{ $smarty.block.parent }}
+{{ /block }}
+
+{{ block name = "style" }}
+<link rel="stylesheet" href="{{ $static_origin }}/src/apollo/css/activity/zhongxueku/zhongxueku.less">
+{{ /block }}
+
+{{ strip }}
+{{ block name="body" }}
+
+<div class="main">
+    <div class="top-nav">
+        <div class="top-container">
+            <span class="top-nav-item logo"><a href="http://www.genshuixue.com"><img src="http://img.gsxservice.com/seo/zhongxueku/logoH.png" alt="跟谁学"></a></span>
+            <span class="top-nav-item line"><a href="">|</a></span>
+            <span class="top-nav-item title"><a href="/zhongxueku/index.html">中学库</a></span>
+            <span class="top-nav-item" ><a href="/zhongxueku/index.html">首页</a></span>
+            <span class="top-nav-item" ><a href="http://www.genshuixue.com/i-zhongkao/a/5/1/" target="_blank">真题</a></span>
+            <span class="top-nav-item" ><a href=" http://www.genshuixue.com/i-zhongkao/a/2/2/" target="_blank">备考须知</a></span>
+            <span class="top-nav-item" ><a href=" http://www.genshuixue.com/i-zhongkao/course/" target="_blank">课程资源</a></span>
+            <span class="top-nav-item" ><a href=" http://www.genshuixue.com/i-zhongkao/a/100/" target="_blank">分类咨询</a></span>
+            <span class="top-nav-item" ><a href="  http://www.genshuixue.com/i-zhongkao/a/2/1/" target="_blank">经验分享</a></span>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="top-bread">
+            <span><a href="http://www.genshuixue.com">跟谁学</a></span>
+            <span>&gt;</span>
+            <span>中学库</span>
+            <!--<span>&gt;</span>-->
+            <!--<span>{{ $tpl_data.province }}</span>-->
+            <span>&gt;</span>
+            <span>{{ $tpl_data.city }}</span>
+            <span>&gt;</span>
+            <span><a href="javascript:void(0);">{{ $tpl_data.school_name }}</a></span>
+            <span>&gt;</span>
+            <span>招生信息</span>
+        </div>
+
+        <div class="middle">
+            <div class="content-middle">
+                <div class="img-logo">
+                    {{ if !empty($tpl_data.school_logo) }}
+                    <img src="{{ $tpl_data.school_logo }}" alt="{{ $tpl_data.school_name }}">
+                    {{ else }}
+                    <img src="http://img.gsxservice.com/seo/zhongxueku/school.png" alt="{{ $tpl_data.school_name }}">
+                    {{ /if }}
+                </div>
+                <div class="img-content">
+                    <h1>{{ $tpl_data.school_name }}</h1>
+                    <div class="school">
+                        {{ if !empty($tpl_data.school_type) }}
+                        <div class="column">
+                            <div class="key">学校类别:&nbsp;</div>
+                            <div class="value">{{ $tpl_data.school_type }}</div>
+                        </div>
+                        <!--<p>-->
+                            <!--<span class="key">学校类别:&nbsp;</span>-->
+                            <!--<span class="value first">{{ $tpl_data.school_type }}</span>-->
+                        <!--</p>-->
+                        {{ /if }}
+                        {{ if !empty($tpl_data.school_name) }}
+                        <div class="column">
+                            <div class="key">中学全称:&nbsp;</div>
+                            <div class="value">{{ $tpl_data.school_name }}</div>
+                        </div>
+                        <!--<p>-->
+                            <!--<span class="key">中学全称:&nbsp;</span>-->
+                            <!--<span class="value">{{ $tpl_data.school_name }}</span>-->
+                        <!--</p>-->
+                        {{ /if }}
+                        {{ if !empty($tpl_data.build_time) }}
+                        <div class="column">
+                            <div class="key">建校时间:&nbsp;</div>
+                            <div class="value">{{ $tpl_data.build_time }}</div>
+                        </div>
+                        <!--<p>-->
+                            <!--<span class="key">建校时间:&nbsp;</span>-->
+                            <!--<span class="value">{{ $tpl_data.build_time }}</span>-->
+                        <!--</p>-->
+                        {{ /if }}
+                        {{ if !empty($tpl_data.president) }}
+                        <div class="column">
+                            <div class="key">现任校长:&nbsp;</div>
+                            <div class="value">{{ $tpl_data.president }}</div>
+                        </div>
+                        <!--<p>-->
+                            <!--<span class="key">现任校长:&nbsp;</span>-->
+                            <!--<span class="value">{{ $tpl_data.president }}</span>-->
+                        <!--</p>-->
+                        {{ /if }}
+                        {{ if !empty($tpl_data.class_type) }}
+                        <div class="column">
+                            <div class="key">班级类型:&nbsp;</div>
+                            <div class="value">{{ $tpl_data.class_type }}</div>
+                        </div>
+                        <!--<p>-->
+                            <!--<span class="key">班级类型:&nbsp;</span>-->
+                            <!--<span class="value">{{ $tpl_data.class_type }}</span>-->
+                        <!--</p>-->
+                        {{ /if }}
+                        {{ if !empty($tpl_data.accommodation) }}
+                        <div class="column">
+                            <div class="key">住宿情况:&nbsp;</div>
+                            <div class="value">{{ $tpl_data.accommodation }}</div>
+                        </div>
+                        <!--<p>-->
+                            <!--<span class="key">住宿情况:&nbsp;</span>-->
+                            <!--<span class="value">{{ $tpl_data.accommodation }}</span>-->
+                        <!--</p>-->
+                        {{ /if }}
+                        {{ if !empty($tpl_data.entrance) }}
+                        <div class="column">
+                            <div class="key">入学途径:&nbsp;</div>
+                            <div class="value">{{ $tpl_data.entrance }}</div>
+                        </div>
+                        <!--<p>-->
+                            <!--<span class="key">入学途径:&nbsp;</span>-->
+                            <!--<span class="value">{{ $tpl_data.entrance }}</span>-->
+                        <!--</p>-->
+                        {{ /if }}
+                        {{ if !empty($tpl_data.examination_type) }}
+                        <div class="column">
+                            <div class="key">试题类型:&nbsp;</div>
+                            <div class="value">{{ $tpl_data.examination_type }}</div>
+                        </div>
+                        <!--<p>-->
+                            <!--<span class="key">试题类型:&nbsp;</span>-->
+                            <!--<span class="value">{{ $tpl_data.examination_type }}</span>-->
+                        <!--</p>-->
+                        {{ /if }}
+                        {{ if !empty($tpl_data.special_enrol) }}
+                        <div class="column">
+                            <div class="key">特殊招生:&nbsp;</div>
+                            <div class="value">{{ $tpl_data.special_enrol }}</div>
+                        </div>
+                        <!--<p>-->
+                            <!--<span class="key">特殊招生:&nbsp;</span>-->
+                            <!--<span class="value">{{ $tpl_data.special_enrol }}</span>-->
+                        <!--</p>-->
+                        {{ /if }}
+                        {{ if !empty($tpl_data.phone) }}
+                        <div class="column">
+                            <div class="key">学校电话:&nbsp;</div>
+                            <div class="value">{{ $tpl_data.phone }}</div>
+                        </div>
+                        <!--<p>-->
+                            <!--<span class="key">学校电话:&nbsp;</span>-->
+                            <!--<span class="value">{{ $tpl_data.phone }}</span>-->
+                        <!--</p>-->
+                        {{ /if }}
+                        {{ if !empty($tpl_data.address) }}
+                        <div class="column">
+                            <div class="key">学校地址:&nbsp;</div>
+                            <div class="value">{{ $tpl_data.address }}</div>
+                        </div>
+                        <!--<p>-->
+                            <!--<span class="key">学校地址:&nbsp;</span>-->
+                            <!--<span class="value">{{ $tpl_data.address }}</span>-->
+                        <!--</p>-->
+                        {{ /if }}
+                        {{ if !empty($tpl_data.site) }}
+                        <div class="column">
+                            <div class="key">学校网址:&nbsp;</div>
+                            <div class="value">{{ $tpl_data.site }}</div>
+                        </div>
+                        <!--<p>-->
+                            <!--<span class="key">学校网址:&nbsp;</span>-->
+                            <!--<span class="value">{{ $tpl_data.site }}</span>-->
+                        <!--</p>-->
+                        {{ /if }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="card-w">
+            <div class="card-nav">
+                <a href="{{ if !empty($tpl_data.school_summary) }}#summary{{ else }}javascript:void(0);{{ /if }}"><div class="cur" style="width:20%;"><h3>学校简介</h3></div></a>
+                <a href="{{ if !empty($tpl_data.faculty) }}#faculty{{ else }}javascript:void(0);{{ /if }}"> <div style="width:20%;"><h3>师资力量</h3></div></a>
+                <a href="{{ if !empty($tpl_data.teaching_quality) }}#quality{{ else }}javascript:void(0);{{ /if }}"><div style="width:20%;"><h3>教学质量</h3></div></a>
+                <a href="{{ if !empty($tpl_data.enrollment_condition) }}#condition{{ else }}javascript:void(0);{{ /if }}"><div style="width:20%;"><h3>招生情况</div></a>
+                <a href="{{ if !empty($tpl_data.school_environment) }}#environment{{ else }}javascript:void(0);{{ /if }}"><div style="width:20%;"><h3>学校环境</h3></div></a>
+            </div>
+            <!--<div class="zhongxue-content">-->
+                <!--学校简介-->
+            {{ if !empty($tpl_data.school_summary) }}
+            <div class="content-card" id="summary">
+                    <div class="content-para">
+                        <div class="title">
+                            <div class="img-logo"><img src="http://img.gsxservice.com/seo/zhongxueku/line1.png"></div>
+                            <div class="img-content"><span>学校简介</span></div>
+                        </div>
+                        <div class="summary">
+                            {{ $tpl_data.school_summary }}
+                        </div>
+                    </div>
+                </div>
+            {{ /if }}
+
+
+            <!--师资力量-->
+            {{ if !empty($tpl_data.faculty) }}
+            <div class="content-card" id="faculty">
+                    <div class="content-para">
+                        <div class="title">
+                            <div class="img-logo"><img src="http://img.gsxservice.com/seo/zhongxueku/line1.png"></div>
+                            <div class="img-content"><span>师资力量</span></div>
+                        </div>
+                        <div class="summary">
+                            {{ $tpl_data.faculty }}
+                        </div>
+                    </div>
+                </div>
+            {{ /if }}
+
+
+            <!--教学质量-->
+            {{ if !empty($tpl_data.teaching_quality) }}
+            <div class="content-card" id="quality">
+                    <div class="content-para">
+                        <div class="title">
+                            <div class="img-logo"><img src="http://img.gsxservice.com/seo/zhongxueku/line1.png"></div>
+                            <div class="img-content"><span>教学质量</span></div>
+                        </div>
+                        <div class="summary">
+                            {{ $tpl_data.teaching_quality }}
+                        </div>
+                    </div>
+                </div>
+            {{ /if }}
+
+
+            <!--招生情况-->
+            {{ if !empty($tpl_data.enrollment_condition) }}
+            <div class="content-card" id="condition">
+                    <div class="content-para">
+                        <div class="title">
+                            <div class="img-logo"><img src="http://img.gsxservice.com/seo/zhongxueku/line1.png"></div>
+                            <div class="img-content"><span>招生情况</span></div>
+                        </div>
+                        <div class="summary">
+                            {{ $tpl_data.enrollment_condition }}
+                        </div>
+                    </div>
+            </div>
+            {{ /if }}
+
+            <!--学校环境-->
+            {{ if !empty($tpl_data.school_environment) }}
+            <div class="content-card" id="environment">
+                    <div class="content-para">
+                        <div class="title">
+                            <div class="img-logo"><img src="http://img.gsxservice.com/seo/zhongxueku/line1.png"></div>
+                            <div class="img-content"><span>学校环境</span></div>
+                        </div>
+                        <div class="summary">
+                            {{ $tpl_data.school_environment }}
+                        </div>
+                    </div>
+                </div>
+            {{ /if }}
+
+            <!--校园一角-->
+            {{ if !empty($tpl_data.photoes) }}
+            <div class="content-card">
+                    <div class="content-para picture">
+                        <div class="title">
+                            <div class="img-logo"><img src="http://img.gsxservice.com/seo/zhongxueku/line1.png"></div>
+                            <div class="img-content"><span>校园一角</span></div>
+                        </div>
+                        <div class="banner">
+                            <div class="img-show">
+                                <div class="img-center">
+                                    <ul class="item">
+                                        {{ foreach $tpl_data.photoes as $item }}
+                                        <li><img src="{{ $item }}"></li>
+                                        {{ /foreach }}
+                                    </ul>
+                                </div>
+                                <div style="clear:both;"></div>
+                                <div class="banner-ul">
+                                    <a href="javascript:void(0);" class="prev"></a>
+                                    <a href="javascript:void(0);" class="next"></a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{ /if }}
+
+            <div class="content-card">
+                    <div class="copyright">
+                        <p>免责声明：本站部分内容、图片、文字、视频等来自于互联网，仅供大家学习与交流。相关内容如涉嫌侵犯您的知识产权或其他合法权益，请向本站发送有效通知，我们会及时处理。反馈邮箱< tousu@genshuixue.com >。</p>
+                    </div>
+                </div>
+            <!--</div>-->
+        </div>
+
+
+    </div>
+
+</div>
+{{ include file="apollo/common/script.html" }}
+
+<script src="http://img.gsxservice.com/seo/zhongxueku/jquery.easing.js"></script>
+<script src="http://img.gsxservice.com/seo/zhongxueku/jquery.mousewheel.js"></script>
+<script src="http://img.gsxservice.com/seo/zhongxueku/jquery.jcarousellite.js"></script>
+<script>
+    $(function(){
+        var len = $('.item li').length;
+        if(len > 5){
+            $(".banner .img-center").jCarouselLite({
+                btnNext: ".banner-ul .next",
+                btnPrev: ".banner .prev"
+            });
+        }
+        else {
+            $('.banner-ul').css('display', 'none');
+        }
+
+    });
+</script>
+{{ /block }}
+{{ /strip }}
+
+
+
+
+
+
+
+
+
+
+
+

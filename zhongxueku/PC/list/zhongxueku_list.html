@@ -1,0 +1,346 @@
+{{ *
+
+@file 中学库pc列表页
+@author zxy
+
+* }}
+{{ extends file = "apollo/common/main/base.html" }}
+
+{{ block name = "data" }}
+
+{{ $smarty.block.parent }}
+{{ $script_path = "activity/zhongxueku/zhongxue_list" }}
+
+{{ *不显示* }}
+{{ $flotage_config.hidden = 1 }}
+{{ *$rave_config.hidden = 1* }}
+{{ $nav_config.hidden = 0 }}
+
+{{ /block }}
+
+{{ block name = "title" }}
+{{ /block }}
+
+{{ block name = "description" }}
+{{ /block }}
+
+{{ block name = "keywords" }}
+{{ /block }}
+
+{{ block name = "icon" }}
+{{ $smarty.block.parent }}
+{{ /block }}
+
+{{ block name = "style" }}
+<link rel="stylesheet" href="{{ $static_origin }}/src/apollo/css/activity/zhongxueku/zhongxue_list.less">
+{{ /block }}
+
+{{ strip }}
+{{ block name="body" }}
+<div class="main">
+    <div class="top-nav">
+        <div class="top-container">
+            <span class="top-nav-item logo"><a href="http://www.genshuixue.com"><img src="http://img.gsxservice.com/seo/zhongxueku/logoH.png" alt="跟谁学"></a></span>
+            <span class="top-nav-item"><a href="">|</a></span>
+            <span class="top-nav-item title"><a href="/zhongxueku/index.html">中学库</a></span>
+            <span class="top-nav-item" ><a href="/zhongxueku/index.html">首页</a></span>
+            <span class="top-nav-item" ><a href="http://www.genshuixue.com/i-zhongkao/a/5/1/" target="_blank">真题</a></span>
+            <span class="top-nav-item" ><a href="http://www.genshuixue.com/i-zhongkao/a/2/2/" target="_blank">备考须知</a></span>
+            <span class="top-nav-item" ><a href=" http://www.genshuixue.com/i-zhongkao/course/" target="_blank">课程资源</a></span>
+            <span class="top-nav-item" ><a href="http://www.genshuixue.com/i-zhongkao/a/100/" target="_blank">分类咨询</a></span>
+            <span class="top-nav-item" ><a href="http://www.genshuixue.com/i-zhongkao/a/2/1/" target="_blank">经验分享</a></span>
+        </div>
+    </div>
+
+    <div class="zxk-banner">
+        <div class="zxk-img">
+            <img src="http://img.gsxservice.com/seo/zhongxueku/pc_banner.png">
+        </div>
+        <div class="zxk-title">
+            <span>中学院校库</span>
+        </div>
+        <div class="search-all">
+            <div class="zxk-search">
+                <input id="searchName" class="searchName" type="text" name="search_name"  placeholder="搜索你想了解的中学名称"/>
+                <button class="search"><img src="http://img.gsxservice.com/seo/zhongxueku/search.png"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="zxk-content">
+            <div class="middle">
+                <div class="content-frame">
+                    <div class="content-bold">所在省份</div>
+                    <div class="items province">
+
+                    </div>
+
+                </div>
+                <div class="content-frame">
+                    <div class="content-bold">所在城市</div>
+                    <div class="items city">
+                    </div>
+
+                </div>
+                <div class="content-frame">
+                    <div class="content-bold">所在区域</div>
+                    <div class="items district">
+                    </div>
+
+                </div>
+
+                 <div class="content-frame">
+                     <div class="content-bold">办学性质</div>
+                     <div class="items school_type">
+                             <span class="item limit highlight" data-name="不限">不限</span>
+                             <span class="item" data-name="公办">公办</span>
+                             <span class="item" data-name="民办">民办</span>
+                     </div>
+                     </div>
+                <!--<div class="content-frame">-->
+                    <!--<div class="content-bold">学校级别</div>-->
+                    <!--<div class="items school_level">-->
+                            <!--<span class="item limit highlight">不限</span>-->
+                            <!--<span class="item">市重点</span>-->
+                            <!--<span class="item">全国重点</span>-->
+                            <!--<span class="item">区重点</span>-->
+                            <!--<span class="item">普通</span>-->
+                            <!--<span class="item">省重点</span>-->
+                    <!--</div>-->
+
+                     <!--</div>-->
+                 <div class="content-frame">
+                     <div class="content-bold">升学方式</div>
+                     <div class="items entrance">
+                             <span class="item limit highlight" data-name="不限">不限</span>
+                             <span class="item" data-name="统招">统招</span>
+                             <span class="item" data-name="自招">自招</span>
+                             <span class="item" data-name="择校">择校</span>
+                             <span class="item" data-name="共建">共建</span>
+                     </div>
+
+                     </div>
+            </div>
+
+            <div class="zxk-content-result" style="border-top: none;">
+                {{ foreach $tpl_data.list as $list }}
+                <div class="single-school">
+                    <div class="show-school">
+                        {{ if !empty($list.school_logo) }}
+                        <img src="{{ $list.school_logo }}" />
+                        {{ else }}
+                        <img src="http://img.gsxservice.com/zhanqun/youshengxiao/default02.jpg"/>
+                        {{ /if }}
+                    </div>
+                    <div class="school-info">
+                        <div class="name">
+                            <h3 class="ellipsis"><a  href="/zhongxueku/{{ $list.id }}.html">{{ $list.school_name }}</a></h3>
+                        </div>
+                        <div class="detail">
+                            {{ if !empty($list.school_type) }}
+                            <span>办公性质:{{ $list.school_type }}</span>
+                            {{ /if }}
+                            <span>学校级别:重点</span>
+                            {{ if !empty($list.entrance) }}
+                            <span>升学方式:{{ $list.entrance }}</span>
+                            {{ /if }}
+                            {{ if !empty($list.school_summary) }}
+                            <div class="summary">
+                                <span class="title">学校简介:</span>
+                                <div class="content-hide" style="display: none;">{{ $list.school_summary }}</div>
+                                <div class="summary-content">
+                                </div>
+                            </div>
+                            {{ /if }}
+                        </div>
+                    </div>
+                </div>
+                {{ /foreach }}
+
+                {{ include file="../../common/component/zhongxue_pager.html" page={{ $tpl_data.curr_page }}  count={{ $tpl_data.total_page }} }}
+
+            </div>
+        </div>
+
+
+
+        <div class="ad">
+            <div class="ad-main-content">
+                <div class="ad-header">
+                    <img src="http://img.gsxservice.com/seo/zhongxueku/line.png"/>
+                    <span>相关课程</span></div>
+                <div style="width: 250px;">
+                    <script src="http://file.gsxservice.com/zhanqun/static/js/un-cr.js?v=9" data-node="un-cr" type="text/javascript"></script>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+        </div>
+
+        <div style="clear:both;"></div>
+
+
+
+        <div class="zxk-recommend">
+            <div class="zxk-recommend-hot">
+                <img src="http://img.gsxservice.com/seo/zhongxueku/line.png"/>
+                <span>热门排行</span>
+            </div>
+            <div class="recommend">
+            <div class="zxk-recommend-1">
+                <p class="zxk-recmmend1-title">最高推荐中学</p>
+                <div class="zxk-recommend2-content">
+
+                    <div class="zxk-recommend-hr">
+                        <span class="zxk-recommend-num1">1</span>
+                        <span><a href="/zhongxueku/66794.html" target="_blank">北京四中 (西城区)</a></span>
+                        <span class="zxk-recommend-color"></span>
+                    </div>
+                    <div class="zxk-recommend-hr">
+                        <span class="zxk-recommend-num2">2</span>
+                        <span><a href="/zhongxueku/66126.html" target="_blank">人大附中 (海淀区)</a></span>
+                        <span class="zxk-recommend-color"></span>
+                    </div><div class="zxk-recommend-hr">
+                    <span class="zxk-recommend-num3">3</span>
+                    <span><a href="/zhongxueku/38769.html" target="_blank">北师大实验中学 (西城区)</a></span>
+                    <span class="zxk-recommend-color"></span>
+                </div><div class="zxk-recommend-hr">
+                    <span class="zxk-recommend-num4">4</span>
+                    <span><a href="/zhongxueku/57152.html" target="_blank">北京二中 (东城区)</a></span>
+                    <span class="zxk-recommend-color"></span>
+                </div><div class="zxk-recommend-hr">
+                    <span class="zxk-recommend-num4">5</span>
+                    <span><a href="/zhongxueku/46875.html" target="_blank">北大附中 (海淀区)</a></span>
+                    <span class="zxk-recommend-color"></span>
+                </div>
+                </div>
+
+            </div>
+            <div class="zxk-recommend-1">
+                <p class="zxk-recmmend1-title">中学热门排行</p>
+                <div class="zxk-recommend2-content">
+
+                    <div class="zxk-recommend-hr">
+                        <span class="zxk-recommend-num1">1</span>
+                        <span><a href="/zhongxueku/66794.html" target="_blank">北京四中 (西城区)</a></span>
+                        <span class="zxk-recommend-color"></span>
+                    </div>
+                    <div class="zxk-recommend-hr">
+                        <span class="zxk-recommend-num2">2</span>
+                        <span><a href="/zhongxueku/66126.html" target="_blank">人大附中 (海淀区)</a></span>
+                        <span class="zxk-recommend-color"></span>
+                    </div><div class="zxk-recommend-hr">
+                    <span class="zxk-recommend-num3">3</span>
+                    <span><a href="/zhongxueku/38769.html" target="_blank">北师大实验中学 (西城区)</a></span>
+                    <span class="zxk-recommend-color"></span>
+                </div><div class="zxk-recommend-hr">
+                    <span class="zxk-recommend-num4">4</span>
+                    <span><a href="/zhongxueku/57152.html" target="_blank">北京二中 (东城区)</a></span>
+                    <span class="zxk-recommend-color"></span>
+                </div><div class="zxk-recommend-hr">
+                    <span class="zxk-recommend-num4">5</span>
+                    <span><a href="/zhongxueku/46875.html" target="_blank">北大附中 (海淀区)</a></span>
+                    <span class="zxk-recommend-color"></span>
+                </div>
+                </div>
+
+            </div>
+            <div class="zxk-recommend-1">
+                <p class="zxk-recmmend1-title">热门学区区域</p>
+                <div class="zxk-recommend3-content">
+                    <div class="zxk-recommend-hr">
+                        <span class="zxk-recommend-num1">1</span>
+                        <span class="hot-district"><a>北京市西城区</a></span>
+                        <span class="zxk-recommend-color"></span>
+                    </div>
+                    <div class="zxk-recommend-hr">
+                        <span class="zxk-recommend-num2">2</span>
+                        <span class="hot-district"><a>北京市海淀区</a></span>
+                        <span class="zxk-recommend-color"></span>
+                    </div><div class="zxk-recommend-hr">
+                    <span class="zxk-recommend-num3">3</span>
+                    <span class="hot-district"><a>北京市朝阳区</a></span>
+                    <span class="zxk-recommend-color"></span>
+                </div><div class="zxk-recommend-hr">
+                    <span class="zxk-recommend-num4">4</span>
+                    <span class="hot-district"><a>北京市东城区</a></span>
+                    <span class="zxk-recommend-color"></span>
+                </div><div class="zxk-recommend-hr">
+                    <span class="zxk-recommend-num4">5</span>
+                    <span class="hot-district"><a>北京市丰台区</a></span>
+                    <span class="zxk-recommend-color"></span>
+                </div>
+
+                </div>
+            </div>
+                </div>
+        </div>
+        <div class="zxk-recommend">
+            <div class="zxk-recommend-hot">
+                <img src="http://img.gsxservice.com/seo/zhongxueku/line.png"/>
+                <span>院校风采</span>
+            </div>
+            <div class="zxk-school-total">
+                <div class="zxk-school-one">
+                    <a class="zxk-school-content" href="/zhongxueku/66794.html">
+                        <div class="zxk-school-img">
+                            <img src="http://file.gsxservice.com/zhanqun/1c8b55b43ea69dc2f7e51aecef340b24.jpg">
+                        </div>
+                        <p class="zxk-school-text">
+                                北京四中(西城区)
+                        </p>
+                    </a>
+                </div>
+                <div class="zxk-school-one">
+                    <a class="zxk-school-content" href="/zhongxueku/38769.html">
+                        <div class="zxk-school-img">
+                            <img src="http://file.gsxservice.com/zhanqun/4cc2ad39db83e5b1c7dd977941f78a64.jpg">
+                        </div>
+                        <p class="zxk-school-text">
+                            北师大实验中学 (西城区)
+                        </p>
+                    </a>
+                </div>
+                <div class="zxk-school-one">
+                    <a class="zxk-school-content" href="/zhongxueku/57152.html">
+                        <div class="zxk-school-img">
+                            <img src="http://file.gsxservice.com/zhanqun/b5e3c33b63426d7c06ca9b41acb2a759.jpg">
+                        </div>
+                        <p class="zxk-school-text">
+                            北京二中(东城区)
+                        </p>
+                    </a>
+                </div>
+                <div class="zxk-school-one">
+                    <a class="zxk-school-content" href="/zhongxueku/46875.html">
+                        <div class="zxk-school-img" >
+                            <img src="http://file.gsxservice.com/zhanqun/db435a69ba31b1ae4e4704ae2a10f142.jpg">
+                        </div>
+                        <p class="zxk-school-text">
+                            北大附中 (海淀区)
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+{{ include file="apollo/common/script.html" }}
+
+{{ /block }}
+{{ /strip }}
+
+
+
+
+
+
+
+
+
+
+
+
